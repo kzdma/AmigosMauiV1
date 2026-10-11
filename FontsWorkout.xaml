@@ -9,6 +9,11 @@
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
 
+        <Label 
+            Text="Sample 2"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />   
+
         <Button 
             Text="&#xe87d;"
             FontFamily="MaterialIcons"
