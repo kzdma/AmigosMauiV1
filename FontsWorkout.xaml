@@ -5,7 +5,7 @@
              Title="FontsWorkout">
     <VerticalStackLayout>
         <Label 
-            Text="Welcome to Kostya!"
+            Text="Welcome to Amigos!"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
 
