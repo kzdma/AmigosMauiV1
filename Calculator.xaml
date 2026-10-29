@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AmigosMauiV1.Calculator"
+             Title="Calculator">
+
+    <Grid   
+        RowDefinitions ="*,*,*,*,*,*,*"
+        ColumnDefinitions = "*,*,*,*">
+
+        <Label
+            Grid.Row="0"
+            Background="Red"
+            TextColor="White"
+            Text="GRID1"
+            FontSize="20" />
+        <Label
+            Grid.Row="1"           
+            Background="Blue"
+            TextColor="White"
+            Text="GRID2"
+            FontSize="20" />
+        <Label
+            Grid.Row="2"           
+            Background="Green"
+            TextColor="White"
+            Text="GRID3"
+            FontSize="20" />
+
+        <Button
+            Grid.Row="3"            
+            Background="SlateGray"
+            TextColor="Wheat"
+            Text="7"
+            CornerRadius="15"
+            FontSize="20" />
+
+       
+        <Button
+             Grid.Row="4" 
+             Text="4"
+             Style="{StaticResource CalcButtonStyle1}"/>
+
+    </Grid>
+</ContentPage>

@@ -8,6 +8,18 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+
+                <ResourceDictionary>
+                    <Style x:Key="CalcButtonStyle1" TargetType="Button">
+                        <Setter Property="BackgroundColor" Value="SlateGray" />
+                        <Setter Property="TextColor" Value="White" />
+                        <Setter Property="CornerRadius" Value="15" />
+                        <Setter Property="FontSize" Value="20" />
+                        <Setter Property="Margin" Value="5" />
+                    </Style>
+                </ResourceDictionary>
+                
+                
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

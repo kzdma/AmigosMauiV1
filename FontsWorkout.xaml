@@ -5,25 +5,25 @@
              Title="FontsWorkout">
     <VerticalStackLayout>
         <Label 
+            FontSize="Large"
             Text="Welcome to Amigos!"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
 
         <Label 
-            Text="Sample 2"
+            WidthRequest="300"
+            FontSize="Large"
+            Text="This is an example of using custom font"
+            FontFamily="BitcountInk"
             VerticalOptions="Center" 
-            HorizontalOptions="Center" />   
+            HorizontalOptions="Center" />
 
         <Button 
             Text="&#xe87d;"
+            WidthRequest="300"
             FontFamily="MaterialIcons"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
-        
-        <Button          
-            ImageSource="home.png"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />   
 
     </VerticalStackLayout>
 </ContentPage>
