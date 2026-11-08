@@ -3,9 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AmigosMauiV1.Views.SignInPage"
              
-             xmlns:views="clr-namespace:AmigosMauiV1.Views"
-             x:DataType="views:SignInPage"
-                     
+             xmlns:views="clr-namespace:AmigosMauiV1.ViewModels"          
+             x:DataType="views:SignInViewModel"
+                       
              Title="SignInPage">
 
     <ContentPage.Background>
@@ -50,8 +50,7 @@
                     Placeholder="סיסמה"
                     TextColor="Wheat"
                     VerticalOptions="Center"/>
-                <Button
-                    x:Name="TogglePassordButton"                   
+                <Button                             
                     Margin="5,0,0,0"
                     Padding="0"
                     BackgroundColor="Transparent"
@@ -61,7 +60,7 @@
                     FontFamily="MaterialIcons"
                     TextColor="White"
                     VerticalOptions="Center"
-                    Clicked="OnTugglePasswordButtonClicked"/>
+                    Command="{Binding ShowPasswordCommand}"/>
             </Grid>
         </Border>
 
@@ -73,7 +72,7 @@
             IsEnabled="{Binding IsSignInButtonEnabled}"
             Text="חיבור"
             TextColor="White"
-            Clicked="OnSignInButtonClicked"/>
+            Command="{Binding SignInCommand}"/>
 
         <!-- שגיאה-->
         <Label          
