@@ -8,12 +8,27 @@ public partial class SignInPage : ContentPage
     private string _userName;
     private string _password;
     private bool _entryAsPassword;
+    private bool _isMessageLableVisible;
+    private string _messageText;
+    private Color _messageColor;
     private bool _isDebugMode => true;
     private DBMokup _dBMokup;
 
     public bool IsSignInButtonEnabled
     {
         get => !(string.IsNullOrEmpty(UserName) || string.IsNullOrEmpty(UserPassword));
+    }
+    public bool IsMessageLableVisible
+    {
+        get => _isMessageLableVisible;
+        set
+        {
+            if (_isMessageLableVisible != value)
+            {
+                _isMessageLableVisible = value;
+                OnPropertyChanged(nameof(IsMessageLableVisible));
+            }
+        }
     }
     public string UserName
     {
@@ -53,6 +68,30 @@ public partial class SignInPage : ContentPage
             }
         }
     }
+    public string MessageText
+    {
+        get => _messageText;
+        set
+        {
+            if (_messageText != value)
+            {
+                _messageText = value;
+                OnPropertyChanged(nameof(MessageText));
+            }
+        }
+    }
+    public Color MessageColor
+    {
+        get => _messageColor;
+        set
+        {
+            if (_messageColor != value)
+            {
+                _messageColor = value;
+                OnPropertyChanged(nameof(MessageColor));
+            }
+        }
+    }
 
 
     public SignInPage()
@@ -82,17 +121,20 @@ public partial class SignInPage : ContentPage
 
     void OnSignInButtonClicked(object sender, EventArgs e)
 	{
-        if(_dBMokup.isExist(UserName, UserPassword))
-        {
-            errorLbl.IsVisible = true;
-            errorLbl.Text = "התחברות הצליחה";
+        var btn = sender as Button;    
+
+        if (_dBMokup.isExist(UserName, UserPassword))
+        {          
+            MessageText = MessagesHelper.SIGNINSUCCESSMESSAGE;
+            MessageColor = Colors.Green;
             //Show a success message or navigate to the next page
         }
         else
         {
-            errorLbl.IsVisible = true;
-            errorLbl.Text = "שם משתמש או סיסמה שגויים";
+            MessageText = MessagesHelper.SIGNINERRORMESSAGE;
+            MessageColor = Colors.Red;
             //DisplayAlert("Error", "Invalid username or password.", "OK");
         }
-    }
+        IsMessageLableVisible = true;
+    }  
 }
