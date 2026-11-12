@@ -56,7 +56,7 @@
                     BackgroundColor="Transparent"
                     FontSize="24"
                     HorizontalOptions="End"
-                    Text="&#xe8f5;"
+                    Text="{Binding TogglePasswordButtonText}"
                     FontFamily="MaterialIcons"
                     TextColor="White"
                     VerticalOptions="Center"
@@ -68,8 +68,7 @@
         <Button
             CornerRadius="8"
             FontSize="18"
-            HeightRequest="50"
-            IsEnabled="{Binding IsSignInButtonEnabled}"
+            HeightRequest="50"           
             Text="חיבור"
             TextColor="White"
             Command="{Binding SignInCommand}"/>

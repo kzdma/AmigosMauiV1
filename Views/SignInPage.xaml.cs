@@ -9,15 +9,6 @@ public partial class SignInPage : ContentPage
     public SignInPage()
 	{
 		InitializeComponent();
-        BindingContext = new SignInViewModel();
-
-        EntryAsPassword = true;
-        _dBMokup = new DBMokup();
-
-        if (_isDebugMode)
-        {
-            UserName = "admin@mail.com";
-            UserPassword = "admin";
-        }
+        BindingContext = new SignInViewModel();   
     }  
 }

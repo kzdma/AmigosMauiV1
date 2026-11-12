@@ -1,4 +1,5 @@
-﻿using AmigosMauiV1.Services;
+﻿using AmigosMauiV1.Helpers;
+using AmigosMauiV1.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.Generic;
@@ -9,8 +10,9 @@ using System.Windows.Input;
 
 namespace AmigosMauiV1.ViewModels
 {
-    public class SignInViewModel : ObservableObject
+    public class SignInViewModel : ViewModelBase //ObservableObject
     {
+        private string? _togglePasswordButtonText;
         private string? _userName;
         private string? _password;
         private bool _entryAsPassword;
@@ -20,10 +22,18 @@ namespace AmigosMauiV1.ViewModels
         private bool _isDebugMode => true;
         private DBMokup? _dBMokup;
 
-        public bool IsSignInButtonEnabled
+        public string TogglePasswordButtonText
         {
-            get => !(string.IsNullOrEmpty(UserName) || string.IsNullOrEmpty(UserPassword));
-        }
+            get => _togglePasswordButtonText!;
+            set
+            {
+                if (_togglePasswordButtonText != value)
+                {
+                    _togglePasswordButtonText = value;
+                    OnPropertyChanged(nameof(TogglePasswordButtonText));
+                }
+            }
+        }  
         public bool IsMessageLableVisible
         {
             get => _isMessageLableVisible;
@@ -38,27 +48,29 @@ namespace AmigosMauiV1.ViewModels
         }
         public string UserName
         {
-            get => _userName;
+            get => _userName!;
             set
             {
                 if (_userName != value)
                 {
                     _userName = value;
                     OnPropertyChanged(nameof(UserName));
-                    OnPropertyChanged(nameof(IsSignInButtonEnabled));
+                    //OnPropertyChanged(nameof(IsSignInButtonEnabled));
+                    (SignInCommand as Command)!.ChangeCanExecute();
                 }
             }
         }
         public string UserPassword
         {
-            get => _password;
+            get => _password!;
             set
             {
                 if (_password != value)
                 {
                     _password = value;
                     OnPropertyChanged(nameof(UserPassword));
-                    OnPropertyChanged(nameof(IsSignInButtonEnabled));
+                    //OnPropertyChanged(nameof(IsSignInButtonEnabled));
+                    (SignInCommand as Command)!.ChangeCanExecute();
                 }
             }
         }
@@ -106,37 +118,51 @@ namespace AmigosMauiV1.ViewModels
 
         public SignInViewModel()
         {
-            ShowPasswordCommand = new Command(OnTugglePasswordButtonClicked);
-            SignInCommand = new Command(OnSignInButtonClicked);
-        }
+            //ShowPasswordCommand = new Command(OnTugglePasswordButtonClicked);
 
-        void OnTugglePasswordButtonClicked()
-        {
-            //var visBtn = sender as Button;
-            //if (EntryAsPassword)
-            //    visBtn!.Text = FontHelper.CLOSED_EYE_ICON;
-            //else
-            //    visBtn!.Text = FontHelper.OPEN_EYE_ICON;
-            //EntryAsPassword = !EntryAsPassword;
+            //Using a lambda expression to define the command action
+            ShowPasswordCommand = new Command(() => 
+            {
+                if (EntryAsPassword)
+                    TogglePasswordButtonText = FontHelper.CLOSED_EYE_ICON;
+                else
+                    TogglePasswordButtonText = FontHelper.OPEN_EYE_ICON;
+                EntryAsPassword = !EntryAsPassword;
+            });
+
+            SignInCommand = new Command(OnSignInButtonClicked, CanSignIn);
+
+            TogglePasswordButtonText = FontHelper.CLOSED_EYE_ICON;
+
+            EntryAsPassword = true;
+            _dBMokup = new DBMokup();
+
+            if (_isDebugMode)
+            {
+                UserName = "admin@mail.com";
+                UserPassword = "admin";
+            }
         }
 
         void OnSignInButtonClicked()
         {
-            //var btn = sender as Button;
-
-            //if (_dBMokup.isExist(UserName, UserPassword))
-            //{
-            //    MessageText = MessagesHelper.SIGNINSUCCESSMESSAGE;
-            //    MessageColor = Colors.Green;
-            //    //Show a success message or navigate to the next page
-            //}
-            //else
-            //{
-            //    MessageText = MessagesHelper.SIGNINERRORMESSAGE;
-            //    MessageColor = Colors.Red;
-            //    //DisplayAlert("Error", "Invalid username or password.", "OK");
-            //}
-            //IsMessageLableVisible = true;
-        }   
+            if (_dBMokup!.IsExist(UserName, UserPassword))
+            {
+                MessageText = MessagesHelper.SIGNINSUCCESSMESSAGE;
+                MessageColor = Colors.Green;
+                //Show a success message or navigate to the next page
+            }
+            else
+            {
+                MessageText = MessagesHelper.SIGNINERRORMESSAGE;
+                MessageColor = Colors.Red;
+                //DisplayAlert("Error", "Invalid username or password.", "OK");
+            }
+            IsMessageLableVisible = true;
+        }
+        private bool CanSignIn()
+        {
+            return !(string.IsNullOrEmpty(UserName) || string.IsNullOrEmpty(UserPassword));
+        }
     }
 }
