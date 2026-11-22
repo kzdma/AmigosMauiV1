@@ -14,7 +14,7 @@ namespace AmigosMauiV1
             //return new Window(new AppShell());
             //return new Window(new FontsWorkout());
             //return new Window(new Calculator());
-            return new Window(new SignInPage());
+            return new Window(new SignUpPage());
         }
     }
 }
