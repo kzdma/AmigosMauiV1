@@ -31,13 +31,7 @@
             <VerticalStackLayout Grid.Row="1" Grid.Column="1">
 
                 <!--  שדה שם פרטי  -->
-                <Border
-                    Margin="0,0,0,10"
-                    Padding="10"
-                    Stroke="#ccc"
-                    StrokeShape="RoundRectangle 8"
-                    StrokeThickness="1">
-
+                <Border Style="{StaticResource FormEntryBorder}">
                     <Entry
                         FontSize="16"
                         Placeholder="First Name"

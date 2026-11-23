@@ -47,11 +47,11 @@
                 <Grid RowDefinitions="*,*,*,*,*,*">
 
                     <!--  שדה שם פרטי  -->
-                    <Border Style="{StaticResource FormBorder}">
+                    <Border Style="{StaticResource FormEntryBorder}">
                         <Entry
                             Placeholder="First Name"
                             Style="{StaticResource FormEntry}"
-                            Text="{Binding FirstName}" />
+                            />
                     </Border>
 
                     <!--  שדה שם משפחה  -->
