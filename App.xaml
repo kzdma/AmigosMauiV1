@@ -18,8 +18,19 @@
                         <Setter Property="Margin" Value="5" />
                     </Style>
                 </ResourceDictionary>
-                
-                
+
+                <!-- Border Style -->
+                <ResourceDictionary>
+                    <Style x:Key="FormEntryBorder" TargetType="Border">
+                        <Setter Property="Margin" Value="0,0,0,10" />
+                        <Setter Property="Padding" Value="10"/>
+                        <Setter Property="Stroke" Value="#ccc"/>
+                        <Setter Property="StrokeShape" Value="RoundRectangle 8"/>
+                        <Setter Property="StrokeThickness" Value="1"/>
+                    </Style>
+                </ResourceDictionary>
+
+
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

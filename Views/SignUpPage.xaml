@@ -102,7 +102,7 @@
                             Margin="5,0,0,0"
                             Padding="0"
                             BackgroundColor="Transparent"
-                            Command="{Binding TogglePasswordCommand}"
+                            Command="{Binding ShowPasswordCommand}"
                             FontFamily="MaterialIcons"
                             FontSize="24"
                             HorizontalOptions="End"
@@ -172,7 +172,7 @@
         </Grid>
 
         <!--  מסך טעינה  -->
-        <Grid
+        <!--<Grid
             HorizontalOptions="Fill"
             IsVisible="{Binding IsBusy}"
             VerticalOptions="Fill">
@@ -185,6 +185,6 @@
                 IsRunning="True"
                 WidthRequest="100"
                 Color="Beige" />
-        </Grid>
+        </Grid>-->
     </Grid>
 </ContentPage>

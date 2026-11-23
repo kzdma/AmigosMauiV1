@@ -1,4 +1,7 @@
-﻿using System;
+﻿using AmigosMauiV1.Helpers;
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,12 +10,16 @@ using System.Windows.Input;
 
 namespace AmigosMauiV1.ViewModels
 {
-    public class SignUpPageViewModel : ViewModelBase
+    public partial class SignUpPageViewModel : ObservableObject
     {
         #region Properties
         private string? _userName;
         private string? _password;
         private string? _errorMessage;
+        private string? _passwordIconCode;
+
+        [ObservableProperty]
+        private bool _entryAsPassword;
 
         public string? UserName
         {
@@ -54,31 +61,54 @@ namespace AmigosMauiV1.ViewModels
                 }
             }
         }
+        public string PasswordIconCode
+        {
+            get => _passwordIconCode!;
+            set
+            {
+                if (_passwordIconCode != value)
+                {
+                    _passwordIconCode = value;
+                    OnPropertyChanged(nameof(PasswordIconCode));
+                }
+            }
+        }
+        
 
         // Commands
         public ICommand? ShowPasswordCommand { get; }
-        public ICommand? SignUpCommand { get; }
+        //public ICommand? SignUpCommand { get; }
         #endregion
 
         public SignUpPageViewModel() 
         {
-            IsBusy = false;
-            SignUpCommand = new Command(SignUp, Validate); 
+            //IsBusy = false;
+            PasswordIconCode = FontHelper.OPEN_EYE_ICON;
+            ShowPasswordCommand = new Command(() =>
+            {
+                if (EntryAsPassword)
+                    PasswordIconCode = FontHelper.CLOSED_EYE_ICON;
+                else
+                    PasswordIconCode = FontHelper.OPEN_EYE_ICON;
+                EntryAsPassword = !EntryAsPassword;
+            });
+            //SignUpCommand = new Command(SignUp, Validate); 
         }
 
+        [RelayCommand]
         private void SignUp()
         {
             try
             {
-                IsBusy = true; //Show lock screen
-                Task.Delay(5000);
+                //IsBusy = true; //Show lock screen
+                //Task.Delay(5000);
 
-                IsBusy = false;
+                //IsBusy = false;
                 ErrorMessage = "GoToMainPage";
             }
             catch (Exception ex)
             {
-                IsBusy = false;
+                //IsBusy = false;
                 ErrorMessage = ex.Message;
                 //await Shell.Current.DisplayAlert("SignUp",ex.Message, "Cancel");
             }
