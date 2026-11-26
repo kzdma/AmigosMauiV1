@@ -1,32 +1,93 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AmigosMauiV1.Views.SignUpView"        
-             Title="SignUpView">
+             x:Class="AmigosMauiV1.Views.SignUpView"
+             BackgroundColor="{AppThemeBinding Light=#F3F4F6, Dark=#0D0D0D}">
+   
+    <ScrollView>
 
-
-    <Grid RowDefinitions="1.5*,3*,1*">
-        <VerticalStackLayout BackgroundColor="Bisque"/>
-
-
-        <!--  User Image  -->
-        <!--<StackLayout Margin="0,15,0,10" VerticalOptions="Center">
- 
-        </StackLayout>-->
-        <VerticalStackLayout Grid.Row="1" BackgroundColor="BlueViolet">
-            <Border
-                HeightRequest="80"
-                WidthRequest="80">
-                <ImageButton                
-                   Margin="0,25,0,20"
-                   Aspect="AspectFit" 
-                   HeightRequest="80"
-                   Source ="shifu.png"/>
+        <VerticalStackLayout Padding="20" Spacing="12" VerticalOptions="Center">
+            <!-- 1. Circular User Avatar -->
+            <Border StrokeShape="RoundRectangle 45"
+                    Stroke="#10B981"
+                    StrokeThickness="2"
+                    HeightRequest="90"
+                    WidthRequest="90"
+                    HorizontalOptions="Center"
+                    Margin="0,0,0,8">
+                <Image Source="shifu.png" Aspect="AspectFill" />
             </Border>
-            
-            
-        </VerticalStackLayout>
-        <VerticalStackLayout Grid.Row="2" BackgroundColor="Red"/>
-    </Grid>
 
+            <!-- 2 & 3. First Name & Last Name Side-by-Side -->
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                <VerticalStackLayout Grid.Column="0" Spacing="4">
+                    <Label Text="First Name" FontSize="12" FontAttributes="Bold" TextColor="#4B5563" />
+                    <Border StrokeShape="RoundRectangle 8" Stroke="#D1D5DB">
+                        <Entry Placeholder="Jane" />
+                    </Border>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Grid.Column="1" Spacing="4">
+                    <Label Text="Last Name" FontSize="12" FontAttributes="Bold" TextColor="#4B5563" />
+                    <Border StrokeShape="RoundRectangle 8" Stroke="#D1D5DB">
+                        <Entry Placeholder="Doe" />
+                    </Border>
+                </VerticalStackLayout>
+            </Grid>
+
+            <!-- 4. Email -->
+            <VerticalStackLayout Spacing="4">
+                <Label Text="Email" FontSize="12" FontAttributes="Bold" TextColor="#4B5563" />
+                <Border StrokeShape="RoundRectangle 8" Stroke="#D1D5DB">
+                    <Entry Placeholder="jane.doe@example.com" Keyboard="Email" />
+                </Border>
+            </VerticalStackLayout>
+
+            <!-- 5. Password -->
+            <VerticalStackLayout Spacing="4">
+                <Label Text="Password" FontSize="12" FontAttributes="Bold" TextColor="#4B5563" />
+                <Border StrokeShape="RoundRectangle 8" Stroke="#D1D5DB">
+                    <Entry Placeholder="••••••••" IsPassword="True" />
+                </Border>
+            </VerticalStackLayout>
+
+            <!-- 6. Mobile -->
+            <VerticalStackLayout Spacing="4">
+                <Label Text="Mobile Number" FontSize="12" FontAttributes="Bold" TextColor="#4B5563" />
+                <Border StrokeShape="RoundRectangle 8" Stroke="#D1D5DB">
+                    <Entry Placeholder="+1 555 019 2834" Keyboard="Telephone" />
+                </Border>
+            </VerticalStackLayout>
+
+            <!-- 10. SignUp Error Message -->
+            <Label x:Name="ErrorLabel"
+                   Text="Error: This email is already registered."
+                   TextColor="#DC2626"
+                   FontSize="13"
+                   FontAttributes="Bold"
+                   IsVisible="true" />
+
+            <!-- 7. SignUp Button -->
+            <Button Text="Sign Up"
+                    BackgroundColor="#10B981"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="8"
+                    HeightRequest="48"
+                    Margin="0,8,0,0" />
+
+            <!-- 8 & 9. Have an account? + SignIn -->
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="5" Margin="0,4,0,0">
+                <Label Text="Have an account?" VerticalOptions="Center" FontSize="14" />
+                <Button Text="Sign In"
+                        BackgroundColor="Transparent"
+                        TextColor="#10B981"
+                        FontAttributes="Bold"
+                        FontSize="14"
+                        Padding="0"
+                        HeightRequest="30" />
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
