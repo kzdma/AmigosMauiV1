@@ -1,6 +1,8 @@
 ﻿using AmigosMauiV1.Helpers;
 using AmigosMauiV1.Services;
+using AmigosMauiV1.Views;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +12,9 @@ using System.Windows.Input;
 
 namespace AmigosMauiV1.ViewModels
 {
-    public class SignInViewModel : ViewModelBase //ObservableObject
+    public partial class SignInViewModel : ObservableObject
     {
+        INavigation _navigation;
         private string? _togglePasswordButtonText;
         private string? _userName;
         private string? _password;
@@ -115,8 +118,8 @@ namespace AmigosMauiV1.ViewModels
         public ICommand ShowPasswordCommand { get; }
         public ICommand SignInCommand { get; }
 
-
-        public SignInViewModel()
+        #region Methods
+        public SignInViewModel(INavigation navigation)
         {
             //ShowPasswordCommand = new Command(OnTugglePasswordButtonClicked);
 
@@ -136,12 +139,19 @@ namespace AmigosMauiV1.ViewModels
 
             EntryAsPassword = true;
             _dBMokup = new DBMokup();
+            _navigation = navigation;
 
             if (_isDebugMode)
             {
                 UserName = "admin@mail.com";
                 UserPassword = "admin";
             }
+        }
+
+        [RelayCommand]
+        private async void GoToSignUp()
+        {
+            await _navigation.PushAsync(new SignUpPage());
         }
 
         void OnSignInButtonClicked()
@@ -164,5 +174,6 @@ namespace AmigosMauiV1.ViewModels
         {
             return !(string.IsNullOrEmpty(UserName) || string.IsNullOrEmpty(UserPassword));
         }
+        #endregion
     }
 }

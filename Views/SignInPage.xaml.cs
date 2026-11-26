@@ -9,6 +9,6 @@ public partial class SignInPage : ContentPage
     public SignInPage()
 	{
 		InitializeComponent();
-        BindingContext = new SignInViewModel();   
+        BindingContext = new SignInViewModel(this.Navigation);   
     }  
 }

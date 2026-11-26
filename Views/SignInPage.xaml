@@ -20,6 +20,8 @@
         Padding="30"
         Spacing="25"
         VerticalOptions="Center">
+        
+        <!-- User Name -->
         <Border
             Padding="10"
             Stroke="#ccc"
@@ -33,6 +35,8 @@
                 TextColor="Wheat"
                 ReturnType="Go"/>
         </Border>
+        
+        <!-- User Password -->
         <Border
             Padding="10"
             Stroke="#ccc"
@@ -72,6 +76,20 @@
             Text="חיבור"
             TextColor="White"
             Command="{Binding SignInCommand}"/>
+
+        <HorizontalStackLayout
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+            <Label
+                VerticalOptions="Center"
+                Text="Don't have an account?">
+            </Label>
+            <Button
+                BackgroundColor="Transparent"
+                Text="SignUp"
+                Command="{Binding GoToSignUpCommand}">
+            </Button>
+        </HorizontalStackLayout>
 
         <!-- שגיאה-->
         <Label          

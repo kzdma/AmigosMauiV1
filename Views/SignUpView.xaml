@@ -1,199 +1,32 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AmigosMauiV1.Views.SignUpView"
+             x:Class="AmigosMauiV1.Views.SignUpView"        
              Title="SignUpView">
 
-    <!--  CommunityToolkit Email validation  -->
-    <ContentPage.Resources>
-        <Style x:Key="InvalidEntryStyle" TargetType="Entry">
-            <Setter Property="TextColor" Value="Red" />
-        </Style>
-        <Style x:Key="ValidEntryStyle" TargetType="Entry">
-            <Setter Property="TextColor" Value="Wheat" />
-        </Style>
-    </ContentPage.Resources>
 
-    <Grid>
-        <Grid RowDefinitions="1.5*,3*,1*">
-            <!--  User Image  -->
-            <StackLayout Margin="0,15,0,10" VerticalOptions="Center">
-                <Border
-                    Background="Transparent"
-                    HeightRequest="150"
-                    HorizontalOptions="Center"
-                    Stroke="{AppThemeBinding Light={DynamicResource Gray900},
-                                             Dark={DynamicResource Gray200}}"
-                    StrokeThickness="2"
-                    VerticalOptions="Center"
-                    WidthRequest="150">
+    <Grid RowDefinitions="1.5*,3*,1*">
+        <VerticalStackLayout BackgroundColor="Bisque"/>
 
-                    <Border.StrokeShape>
-                        <RoundRectangle CornerRadius="75" />
-                    </Border.StrokeShape>
 
-                    <ImageButton
-                        x:Name="btnUserImage"
-                        Margin="0,25,0,20"
-                        Aspect="Fill"                     
-                        HeightRequest="180"
-                        Source="shifu.png" />
-                </Border>
-            </StackLayout>
-
-            <!--  User Fields  -->
-            <VerticalStackLayout Grid.Row="1" VerticalOptions="Center">
-
-                <Grid RowDefinitions="*,*,*,*,*,*">
-
-                    <!--  שדה שם פרטי  -->
-                    <Border Style="{StaticResource FormEntryBorder}">
-                        <Entry
-                            Placeholder="First Name"
-                            Style="{StaticResource FormEntry}"
-                            />
-                    </Border>
-
-                    <!--  שדה שם משפחה  -->
-                    <Border Grid.Row="1" Style="{StaticResource FormBorder}">
-                        <Entry
-                            Placeholder="Last Name"
-                            Style="{StaticResource FormEntry}"
-                            Text="{Binding LastName}" />
-                    </Border>
-
-                    <!--  שדה דואל  -->
-                    <Border Grid.Row="2" Style="{StaticResource FormBorder}">
-                        <Entry
-                            Keyboard="Email"
-                            Placeholder="Email"
-                            Style="{StaticResource FormEntry}"
-                            Text="{Binding UserEmail}">
-
-                            <Entry.Behaviors>
-                                <toolkit:EmailValidationBehavior
-                                    Flags="ValidateOnValueChanged"
-                                    InvalidStyle="{StaticResource InvalidEntryStyle}"
-                                    ValidStyle="{StaticResource ValidEntryStyle}" />
-                            </Entry.Behaviors>
-                        </Entry>
-                    </Border>
-
-                    <!--  שדה סיסמה  -->
-                    <Border Grid.Row="3" Style="{StaticResource FormBorder}">
-
-                        <Grid
-                            Padding="2"
-                            ColumnDefinitions="*,Auto"
-                            VerticalOptions="Center">
-
-                            <Entry
-                                IsPassword="{Binding EntryAsPassword}"
-                                Placeholder="Password"
-                                Style="{StaticResource FormEntry}"
-                                Text="{Binding UserPassword}" />
-
-                            <Button
-                                Margin="5,0,0,0"
-                                Padding="0"
-                                BackgroundColor="Transparent"
-                                Command="{Binding ShowPasswordCommand}"
-                                FontFamily="MaterialIcons"
-                                FontSize="24"
-                                HorizontalOptions="End"
-                                Text="{Binding PasswordIconCode}"
-                                TextColor="{AppThemeBinding Light={DynamicResource Gray900},
-                                                            Dark={DynamicResource Gray200}}"
-                                VerticalOptions="Center" />
-                        </Grid>
-                    </Border>
-
-                    <!--  שדה מספר נייד  -->
-                    <Border Grid.Row="4" Style="{StaticResource FormBorder}">
-                        <Entry
-                            Keyboard="Telephone"
-                            Placeholder="Mobile"
-                            Style="{StaticResource FormEntry}"
-                            />
-                    </Border>
-
-                    <!--  כפתור הרשמה  -->
-                    <VerticalStackLayout Grid.Row="5">
-
-                        <!--  Debug Mode Message  -->
-                        <Label
-                            Margin="30,0,0,10"
-                            IsVisible="{Binding IsDebugMode}"
-                            Text="Debug Mode!"
-                            TextColor="{AppThemeBinding Dark=Pink,
-                                                        Light=Red}" />
-
-                        <!--  Error Message  -->
-                        <Label
-                            Margin="30,0,0,10"
-                            IsVisible="{Binding ErrorSignUpMessage}"
-                            Text="Invalid SignUp values!"
-                            TextColor="{AppThemeBinding Dark=Pink,
-                                                        Light=Red}" />
-
-                        <Button
-                            Margin="30,0,30,0"
-                            Command="{Binding SignUpCommand}"
-                            CornerRadius="8"
-                            FontSize="18"
-                            HeightRequest="50"
-                            Text="Sign Up"
-                            TextColor="{AppThemeBinding Light={DynamicResource Gray100},
-                                                        Dark={DynamicResource White}}" />
-
-                    </VerticalStackLayout>
-                </Grid>
-
-            </VerticalStackLayout>
-
-            <!--  GoTo SignIn  -->
-            <HorizontalStackLayout
-                Grid.Row="2"
-                HorizontalOptions="Center"
-                IsVisible="{Binding PageSource, Converter={StaticResource StringNullToBoolConverter}}"
-                VerticalOptions="Start">
-
-                <Label
-                    Margin="14,0,0,0"
-                    FontSize="16"
-                    IsVisible="{Binding PageSource, Converter={StaticResource StringNullToBoolConverter}}"
-                    Text="Already have an account?"
-                    TextColor="{AppThemeBinding Light={DynamicResource Gray900},
-                                                Dark={DynamicResource Gray200}}"
-                    VerticalTextAlignment="Center" />
-
-                <Button
-                    BackgroundColor="Transparent"
-                    Command="{Binding GoToSignInCommand}"
-                    FontSize="16"
-                    Text="SignIn"
-                    TextColor="{AppThemeBinding Light={DynamicResource Magenta},
-                                                Dark={DynamicResource Aqua}}" />
-
-            </HorizontalStackLayout>
-        </Grid>
-
-        <!--  מסך טעינה  -->
-        <Grid
-            HorizontalOptions="Fill"
-            IsVisible="{Binding IsBusy}"
-            VerticalOptions="Fill">
-
-            <BoxView
-                BackgroundColor="LightBlue"
-                HorizontalOptions="Fill"
-                Opacity="0.7"
-                VerticalOptions="Fill" />
-
-            <ActivityIndicator
-                IsRunning="True"
-                WidthRequest="100"
-                Color="Beige" />
-        </Grid>
+        <!--  User Image  -->
+        <!--<StackLayout Margin="0,15,0,10" VerticalOptions="Center">
+ 
+        </StackLayout>-->
+        <VerticalStackLayout Grid.Row="1" BackgroundColor="BlueViolet">
+            <Border
+                HeightRequest="80"
+                WidthRequest="80">
+                <ImageButton                
+                   Margin="0,25,0,20"
+                   Aspect="AspectFit" 
+                   HeightRequest="80"
+                   Source ="shifu.png"/>
+            </Border>
+            
+            
+        </VerticalStackLayout>
+        <VerticalStackLayout Grid.Row="2" BackgroundColor="Red"/>
     </Grid>
+
 </ContentPage>

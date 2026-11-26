@@ -11,11 +11,8 @@ namespace AmigosMauiV1
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            //return new Window(new AppShell());
-            //return new Window(new FontsWorkout());
-            //return new Window(new Calculator());
-            //return new Window(new SignUpPage());
-            return new Window(new SignUpView());
+            var navPage = new NavigationPage(new SignInPage());
+            return new Window(navPage);
         }
     }
 }
