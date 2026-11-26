@@ -117,14 +117,14 @@ namespace AmigosMauiV1.ViewModels
         // Commands
         public ICommand ShowPasswordCommand { get; }
         public ICommand SignInCommand { get; }
+        public ICommand GoToSignUpCommand { get; }
 
         #region Methods
         public SignInViewModel(INavigation navigation)
         {
-            //ShowPasswordCommand = new Command(OnTugglePasswordButtonClicked);
-
-            //Using a lambda expression to define the command action
-            ShowPasswordCommand = new Command(() => 
+            GoToSignUpCommand = new Command(async() => await _navigation!.PushAsync(new SignUpPage()));
+            SignInCommand = new Command(OnSignInButtonClicked, CanSignIn);
+            ShowPasswordCommand = new Command(() =>
             {
                 if (EntryAsPassword)
                     TogglePasswordButtonText = FontHelper.CLOSED_EYE_ICON;
@@ -132,8 +132,6 @@ namespace AmigosMauiV1.ViewModels
                     TogglePasswordButtonText = FontHelper.OPEN_EYE_ICON;
                 EntryAsPassword = !EntryAsPassword;
             });
-
-            SignInCommand = new Command(OnSignInButtonClicked, CanSignIn);
 
             TogglePasswordButtonText = FontHelper.CLOSED_EYE_ICON;
 
@@ -146,13 +144,22 @@ namespace AmigosMauiV1.ViewModels
                 UserName = "admin@mail.com";
                 UserPassword = "admin";
             }
+
+
+            //ShowPasswordCommand = new Command(OnTugglePasswordButtonClicked);
+
+            //Using a lambda expression to define the command action
+            
+
+            
+            
         }
 
-        [RelayCommand]
-        private async void GoToSignUp()
-        {
-            await _navigation.PushAsync(new SignUpPage());
-        }
+        //[RelayCommand]
+        //private async Task GoToSignUp()
+        //{
+        //    await _navigation.PushAsync(new SignUpPage());
+        //}
 
         void OnSignInButtonClicked()
         {
